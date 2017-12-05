@@ -14,6 +14,11 @@ namespace BookShop.WebAPI.DAL
 
         }
 
+        static BookShopContext()
+        {
+            Database.SetInitializer<BookShopContext>(new BookShopInitializer());
+        }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Carrier> Carriers { get; set; }
         public DbSet<Category> Caregories { get; set; }
