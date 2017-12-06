@@ -5,12 +5,12 @@ using System.Web;
 
 namespace BookShop.WebAPI.Models
 {
-    public class Category
+    public class Author
     {
-        public uint CategoryId { get; set; }
+        public uint AuthorId { get; set; }
 
-        public bool IsDeleted { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public ICollection<Book> Books { get; set; }
     }
