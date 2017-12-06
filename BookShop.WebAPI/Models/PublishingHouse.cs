@@ -5,10 +5,8 @@ using System.Web;
 
 namespace BookShop.WebAPI.Models
 {
-    public class PublishingHouse
+    public class PublishingHouse : BaseEntity
     {
-        public int PublishingHouseId { get; set; }
-
         public string Name { get; set; }
 
         public ICollection<Book> Books { get; set; }

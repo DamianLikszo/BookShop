@@ -14,11 +14,6 @@ namespace BookShop.WebAPI.DAL
 
         }
 
-        static BookShopContext()
-        {
-            Database.SetInitializer<BookShopContext>(new BookShopInitializer());
-        }
-
         public DbSet<Book> Books { get; set; }
         public DbSet<Carrier> Carriers { get; set; }
         public DbSet<Category> Caregories { get; set; }
@@ -27,6 +22,14 @@ namespace BookShop.WebAPI.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Book>()
+                .Property(b => b.DateAdded)
+                .HasColumnType("datetime2");
+
+            modelBuilder.Entity<Book>()
+                .Property(b => b.DateRelease)
+                .HasColumnType("datetime2");
+
             // Relacje
             modelBuilder.Entity<Book>()
                 .HasRequired<Author>(b => b.Author)
@@ -37,11 +40,6 @@ namespace BookShop.WebAPI.DAL
                 .HasRequired<Category>(b => b.Category)
                 .WithMany(c => c.Books)
                 .HasForeignKey(b => b.CategoryId);
-
-            modelBuilder.Entity<Book>()
-                .HasRequired<Carrier>(b => b.Carrier)
-                .WithMany(c => c.Books)
-                .HasForeignKey(b => b.CarrierId);
 
             modelBuilder.Entity<Book>()
                 .HasRequired<PublishingHouse>(b => b.PublishingHouse)

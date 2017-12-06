@@ -11,66 +11,65 @@ namespace BookShop.WebAPI.Migrations
                 "dbo.Authors",
                 c => new
                     {
-                        AuthorId = c.Int(nullable: false, identity: true),
+                        Id = c.Long(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.AuthorId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Books",
                 c => new
                     {
-                        BookId = c.Int(nullable: false, identity: true),
-                        IsDeleted = c.Boolean(nullable: false),
-                        DateAdded = c.DateTime(nullable: false),
-                        DateRelease = c.DateTime(nullable: false),
+                        Id = c.Long(nullable: false, identity: true),
+                        DateAdded = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DateRelease = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Opportunity = c.Boolean(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Title = c.String(),
-                        AuthorId = c.Int(nullable: false),
-                        CarrierId = c.Int(nullable: false),
-                        CategoryId = c.Int(nullable: false),
-                        PublishingHouseId = c.Int(nullable: false),
+                        AuthorId = c.Long(nullable: false),
+                        CategoryId = c.Long(nullable: false),
+                        PublishingHouseId = c.Long(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.BookId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Authors", t => t.AuthorId, cascadeDelete: true)
-                .ForeignKey("dbo.Carriers", t => t.CarrierId, cascadeDelete: true)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
                 .ForeignKey("dbo.PublishingHouses", t => t.PublishingHouseId, cascadeDelete: true)
                 .Index(t => t.AuthorId)
-                .Index(t => t.CarrierId)
                 .Index(t => t.CategoryId)
                 .Index(t => t.PublishingHouseId);
-            
-            CreateTable(
-                "dbo.Carriers",
-                c => new
-                    {
-                        CarrierId = c.Int(nullable: false, identity: true),
-                        IsDeleted = c.Boolean(nullable: false),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.CarrierId);
             
             CreateTable(
                 "dbo.Categories",
                 c => new
                     {
-                        CategoryId = c.Int(nullable: false, identity: true),
-                        IsDeleted = c.Boolean(nullable: false),
+                        Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.CategoryId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.PublishingHouses",
                 c => new
                     {
-                        PublishingHouseId = c.Int(nullable: false, identity: true),
+                        Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.PublishingHouseId);
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Carriers",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
         }
         
@@ -78,15 +77,13 @@ namespace BookShop.WebAPI.Migrations
         {
             DropForeignKey("dbo.Books", "PublishingHouseId", "dbo.PublishingHouses");
             DropForeignKey("dbo.Books", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.Books", "CarrierId", "dbo.Carriers");
             DropForeignKey("dbo.Books", "AuthorId", "dbo.Authors");
             DropIndex("dbo.Books", new[] { "PublishingHouseId" });
             DropIndex("dbo.Books", new[] { "CategoryId" });
-            DropIndex("dbo.Books", new[] { "CarrierId" });
             DropIndex("dbo.Books", new[] { "AuthorId" });
+            DropTable("dbo.Carriers");
             DropTable("dbo.PublishingHouses");
             DropTable("dbo.Categories");
-            DropTable("dbo.Carriers");
             DropTable("dbo.Books");
             DropTable("dbo.Authors");
         }

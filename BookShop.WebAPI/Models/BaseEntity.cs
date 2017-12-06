@@ -5,8 +5,9 @@ using System.Web;
 
 namespace BookShop.WebAPI.Models
 {
-    public class Carrier : BaseEntity
+    public class BaseEntity
     {
-        public string Name { get; set; }
+        public long Id { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
