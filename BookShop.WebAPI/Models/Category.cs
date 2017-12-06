@@ -7,7 +7,7 @@ namespace BookShop.WebAPI.Models
 {
     public class Category
     {
-        public uint CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public bool IsDeleted { get; set; }
         public string Name { get; set; }

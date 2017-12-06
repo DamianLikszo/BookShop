@@ -7,7 +7,7 @@ namespace BookShop.WebAPI.Models
 {
     public class Carrier
     {
-        public uint CarrierId { get; set; }
+        public int CarrierId { get; set; }
 
         public bool IsDeleted { get; set; }
         public string Name { get; set; }

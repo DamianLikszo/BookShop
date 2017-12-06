@@ -7,7 +7,7 @@ namespace BookShop.WebAPI.Models
 {
     public class PublishingHouse
     {
-        public uint PublishingHouseId { get; set; }
+        public int PublishingHouseId { get; set; }
 
         public string Name { get; set; }
 

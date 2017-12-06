@@ -31,7 +31,7 @@ namespace BookShop.WebAPI.DAL
             modelBuilder.Entity<Book>()
                 .HasRequired<Author>(b => b.Author)
                 .WithMany(a => a.Books)
-                .HasForeignKey(b => b.AuhtorId);
+                .HasForeignKey(b => b.AuthorId);
 
             modelBuilder.Entity<Book>()
                 .HasRequired<Category>(b => b.Category)
