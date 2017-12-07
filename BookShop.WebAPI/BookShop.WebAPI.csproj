@@ -190,7 +190,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="BLL\Services\BookService.cs" />
+    <Compile Include="BLL\Services\IBookService.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\CarriresController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\BookShopContext.cs" />
