@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookShop.WebAPI.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,8 @@ namespace BookShop.WebAPI.Controllers
 {
     public class ValuesController : ApiController
     {
+        BookShopContext db = new BookShopContext();
+
         // GET api/values
         public IEnumerable<string> Get()
         {
