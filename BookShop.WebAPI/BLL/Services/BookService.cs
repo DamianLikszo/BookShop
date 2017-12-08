@@ -16,7 +16,7 @@ namespace BookShop.WebAPI.BLL.Services
             DateTime dateFrom, dateTo, dateNow = DateTime.Now;
             var query = db.Books.AsQueryable();
             query = query.Where(book => !book.IsDeleted);
-            filtrValue.ToLower();
+            filtrValue = filtrValue.ToLower();
 
             switch (additional)
             {
@@ -45,25 +45,28 @@ namespace BookShop.WebAPI.BLL.Services
             if (category > 0)
                 query = query.Where(book => category == book.Category.Id);
 
+            query = query.OrderBy(book => book.Title);
+
             return query;
         }
 
         public IQueryable<Book> createQueryCategoryOnly(BookShopContext db, string category)
         {
             category = category.ToLower();
-            return db.Books.Where(book => category == book.Category.Name);
+            return db.Books.Where(book => !book.IsDeleted && book.Category.Name.ToLower().Contains(category)).OrderBy(book => book.Category.Name);
         }
 
         public IQueryable<Book> createQueryPublishingHouseOnly(BookShopContext db, string publishingHouse)
         {
             publishingHouse = publishingHouse.ToLower();
-            return db.Books.Where(book => publishingHouse == book.PublishingHouse.Name);
+            return db.Books.Where(book => !book.IsDeleted && book.PublishingHouse.Name.ToLower().Contains(publishingHouse))
+                           .OrderBy(book => book.PublishingHouse.Name);
         }
 
         public IQueryable<Book> createQueryTitleOnly(BookShopContext db, string title)
         { 
             title = title.ToLower();
-            return db.Books.Where(book => !book.IsDeleted && book.Title.ToLower() == title);
+            return db.Books.Where(book => !book.IsDeleted && book.Title.ToLower().Contains(title)).OrderBy(book => book.Title);
         }
     }
 }
