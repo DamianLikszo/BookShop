@@ -11,14 +11,20 @@ namespace BookShop.WebAPI.Controllers
     [RoutePrefix("api/books")]
     public class BooksController : ApiController
     {
-        private readonly BookShopContext _db = new BookShopContext();
-        private readonly IBookService _bookSevice = new BookService();
+        private readonly BookShopContext _db;
+        private readonly IBookService _bookSevice;
+
+        public BooksController()
+        {
+            _db = new BookShopContext();
+            _bookSevice = new BookService(_db);
+        }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<Book> Get(int category = 0, ExtraCategory extraCategory = 0, string filtrValue = "")
         {
-            var books = _bookSevice.createQueryPrimary(_db, extraCategory, category, filtrValue).ToList();
+            var books = _bookSevice.createQuery(extraCategory, category, filtrValue);
             return books;
         }
 

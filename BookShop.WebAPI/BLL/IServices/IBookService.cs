@@ -1,12 +1,11 @@
-﻿using BookShop.WebAPI.DAL;
-using BookShop.WebAPI.Models;
-using System.Linq;
+﻿using BookShop.WebAPI.Models;
 using BookShop.WebAPI.Enums;
+using System.Collections.Generic;
 
 namespace BookShop.WebAPI.BLL.Services
 {
     interface IBookService
     {
-        IQueryable<Book> createQueryPrimary(BookShopContext db, ExtraCategory extraCategory, int category, string filtrValue);
+        IEnumerable<Book> createQuery(ExtraCategory extraCategory, int category, string filtrValue);
     }
 }

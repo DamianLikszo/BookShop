@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookShop.WebAPI.DAL;
 using BookShop.WebAPI.Enums;
@@ -8,13 +9,35 @@ namespace BookShop.WebAPI.BLL.Services
 {
     public class BookService : IBookService
     {
-        public IQueryable<Book> createQueryPrimary(BookShopContext db, ExtraCategory extraCategory, int category, string filtrValue)
+        private readonly BookShopContext _db;
+
+        public BookService(BookShopContext db)
         {
-            DateTime dateFrom, dateTo, dateNow = DateTime.Now;
-            var query = db.Books.AsQueryable();
+            _db = db;
+        }
+
+        public IEnumerable<Book> createQuery(ExtraCategory extraCategory, int category, string filtrValue)
+        {
+            var query = _db.Books.AsQueryable();
             query = query.Where(book => !book.IsDeleted);
             filtrValue = filtrValue.ToLower();
 
+            if (extraCategory != ExtraCategory.None)
+                this.queryAddExtraCategory(ref query, extraCategory);
+            if (filtrValue != string.Empty)
+                this.queryAddFiltrValue(ref query, filtrValue);
+            if (category > 0)
+                query = query.Where(book => category == book.Category.Id);
+
+            query = query.OrderBy(book => book.Title);
+
+            return query.ToList();
+        }
+        
+        private void queryAddExtraCategory( ref IQueryable<Book> query, ExtraCategory extraCategory)
+        {
+            DateTime dateFrom, dateTo, dateNow = DateTime.Now;
+            ;
             switch (extraCategory)
             {
                 case ExtraCategory.Nowosci:
@@ -30,21 +53,15 @@ namespace BookShop.WebAPI.BLL.Services
                     query = query.Where(book => book.Opportunity);
                     break;
             }
+        }
 
-            if (filtrValue != string.Empty)
-            {
-                query = query.Where(book => book.Title.ToLower().Contains(filtrValue) ||
-                                            (book.Author.FirstName.ToLower() + " " + book.Author.LastName.ToLower()).Contains(filtrValue) ||
-                                            (book.Author.LastName.ToLower() + " " + book.Author.FirstName.ToLower()).Contains(filtrValue) ||
-                                            book.PublishingHouse.Name.ToLower().Contains(filtrValue)
-                                            );
-            }
-            if (category > 0)
-                query = query.Where(book => category == book.Category.Id);
-
-            query = query.OrderBy(book => book.Title);
-
-            return query;
+        private void queryAddFiltrValue(ref IQueryable<Book> query, string filtrValue)
+        {
+            query = query.Where(book => book.Title.ToLower().Contains(filtrValue) ||
+                                        (book.Author.FirstName.ToLower() + " " + book.Author.LastName.ToLower()).Contains(filtrValue) ||
+                                        (book.Author.LastName.ToLower() + " " + book.Author.FirstName.ToLower()).Contains(filtrValue) ||
+                                        book.PublishingHouse.Name.ToLower().Contains(filtrValue)
+            );
         }
     }
 }
