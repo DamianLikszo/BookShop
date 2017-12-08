@@ -11,7 +11,9 @@ namespace BookShop.WebAPI.BLL.Services
 {
     interface IBookService
     {
-        IQueryable<Book> createQuery(BookShopContext db, Additional additional, int category, string filtrValue);
-        IEnumerable<BookDTO> mapBooks(IEnumerable<Book> books);
+        IQueryable<Book> createQueryPrimary(BookShopContext db, Additional additional, int category, string filtrValue);
+        IQueryable<Book> createQueryTitleOnly(BookShopContext db, string title);
+        IQueryable<Book> createQueryCategoryOnly(BookShopContext db, string category);
+        IQueryable<Book> createQueryPublishingHouseOnly(BookShopContext db, string publishingHouse);
     }
 }

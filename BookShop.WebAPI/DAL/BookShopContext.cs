@@ -33,18 +33,15 @@ namespace BookShop.WebAPI.DAL
             // Relacje
             modelBuilder.Entity<Book>()
                 .HasRequired<Author>(b => b.Author)
-                .WithMany(a => a.Books)
-                .HasForeignKey(b => b.AuthorId);
+                .WithMany(a => a.Books);
 
             modelBuilder.Entity<Book>()
                 .HasRequired<Category>(b => b.Category)
-                .WithMany(c => c.Books)
-                .HasForeignKey(b => b.CategoryId);
+                .WithMany(c => c.Books);
 
             modelBuilder.Entity<Book>()
                 .HasRequired<PublishingHouse>(b => b.PublishingHouse)
-                .WithMany(p => p.Books)
-                .HasForeignKey(b => b.PublishingHouseId);
+                .WithMany(p => p.Books);
 
             // Indeksy
             // ... 

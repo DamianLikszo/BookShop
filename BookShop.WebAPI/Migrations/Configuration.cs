@@ -72,32 +72,33 @@ namespace BookShop.WebAPI.Migrations
             Authors.ForEach(item => context.Authors.AddOrUpdate(item));
             context.SaveChanges();
 
-            var Books = new List<Book>()
-            {
-                 new Book() { Id = 1, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 10, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Najlepsze dania" },
-                 new Book() { Id = 2, AuthorId = 2,  CategoryId = 2, DateAdded = new DateTime(2017, 1, 11, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 2, Title = "Koty" },
-                 new Book() { Id = 3, AuthorId = 3,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 12, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 13, PublishingHouseId = 3, Title = "Psy" },
-                 new Book() { Id = 4, AuthorId = 4,  CategoryId = 1, DateAdded = new DateTime(2017, 3, 13, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 4, Title = "Koty i Psy" },
-                 new Book() { Id = 5, AuthorId = 5,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 14, 8, 30, 5), DateRelease = new DateTime(2017, 12, 10, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 5, Title = "Dania dla kota" },
-                 new Book() { Id = 6, AuthorId = 6,  CategoryId = 2, DateAdded = new DateTime(2017, 6, 15, 8, 30, 5), DateRelease = new DateTime(2016, 12, 11, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 6, Title = "Dania dla psa" },
-                 new Book() { Id = 7, AuthorId = 7,  CategoryId = 1, DateAdded = new DateTime(2017, 7, 16, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 14, PublishingHouseId = 7, Title = "Zbawy z psem" },
-                 new Book() { Id = 8, AuthorId = 8,  CategoryId = 2, DateAdded = new DateTime(2017, 8, 17, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 8, Title = "Zabawy z kotem" },
-                 new Book() { Id = 9, AuthorId = 9,  CategoryId = 1, DateAdded = new DateTime(2017, 9, 18, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Praca w IT" },
-                 new Book() { Id = 10, AuthorId = 10,  CategoryId = 1, DateAdded = new DateTime(2017, 3, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 11, PublishingHouseId = 3, Title = "Programowanie" },
-                 new Book() { Id = 11, AuthorId = 11,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 122, PublishingHouseId = 3, Title = "C# w pigu³ce" },
-                 new Book() { Id = 12, AuthorId = 12,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 2, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 3, Title = "Szybko i ³atwo" },
-                 new Book() { Id = 13, AuthorId = 1,  CategoryId = 2, DateAdded = new DateTime(2017, 3, 11, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Najlepsze Obrazy" },
-                 new Book() { Id = 14, AuthorId = 2,  CategoryId = 1, DateAdded = new DateTime(2017, 4, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 13, PublishingHouseId = 2, Title = "Najlepsze æwiczenia na si³owni" },
-                 new Book() { Id = 15, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 17, PublishingHouseId = 1, Title = "Bieganie ranem" },
-                 new Book() { Id = 16, AuthorId = 1,  CategoryId = 2, DateAdded = new DateTime(2017, 6, 23, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Maraton" },
-                 new Book() { Id = 17, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = true, Price = 12, PublishingHouseId = 2, Title = "Dwa oblicza" },
-                 new Book() { Id = 18, AuthorId = 2,  CategoryId = 1, DateAdded = new DateTime(2017, 11, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = true, Price = 15, PublishingHouseId = 1, Title = "Najlepsze gry komputerowe" },
-                 new Book() { Id = 19, AuthorId = 2,  CategoryId = 2, DateAdded = new DateTime(2017, 3, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = true, Price = 13, PublishingHouseId = 5, Title = "Logika dla leniwych" },
-                 new Book() { Id = 20, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 4, 12, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = false, Price = 11, PublishingHouseId = 3, Title = "Gdzie kupiæ mieszkanie" },
-                 new Book() { Id = 21, AuthorId = 3,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Usuniête", IsDeleted = true }
-             };
-             Books.ForEach(item => context.Books.AddOrUpdate(item));
-             context.SaveChanges();
+
+            //var Books = new List<Book>()
+            //{
+            //     new Book() { Id = 1, AuthorId =1,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 10, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Najlepsze dania" },
+            //     new Book() { Id = 2, AuthorId = 2,  CategoryId = 2, DateAdded = new DateTime(2017, 1, 11, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 2, Title = "Koty" },
+            //     new Book() { Id = 3, AuthorId = 3,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 12, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 13, PublishingHouseId = 3, Title = "Psy" },
+            //     new Book() { Id = 4, AuthorId = 4,  CategoryId = 1, DateAdded = new DateTime(2017, 3, 13, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 4, Title = "Koty i Psy" },
+            //     new Book() { Id = 5, AuthorId = 5,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 14, 8, 30, 5), DateRelease = new DateTime(2017, 12, 10, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 5, Title = "Dania dla kota" },
+            //     new Book() { Id = 6, AuthorId = 6,  CategoryId = 2, DateAdded = new DateTime(2017, 6, 15, 8, 30, 5), DateRelease = new DateTime(2016, 12, 11, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 6, Title = "Dania dla psa" },
+            //     new Book() { Id = 7, AuthorId = 7,  CategoryId = 1, DateAdded = new DateTime(2017, 7, 16, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 14, PublishingHouseId = 7, Title = "Zbawy z psem" },
+            //     new Book() { Id = 8, AuthorId = 8,  CategoryId = 2, DateAdded = new DateTime(2017, 8, 17, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 8, Title = "Zabawy z kotem" },
+            //     new Book() { Id = 9, AuthorId = 9,  CategoryId = 1, DateAdded = new DateTime(2017, 9, 18, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Praca w IT" },
+            //     new Book() { Id = 10, AuthorId = 10,  CategoryId = 1, DateAdded = new DateTime(2017, 3, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 11, PublishingHouseId = 3, Title = "Programowanie" },
+            //     new Book() { Id = 11, AuthorId = 11,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 122, PublishingHouseId = 3, Title = "C# w pigu³ce" },
+            //     new Book() { Id = 12, AuthorId = 12,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 2, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 3, Title = "Szybko i ³atwo" },
+            //     new Book() { Id = 13, AuthorId = 1,  CategoryId = 2, DateAdded = new DateTime(2017, 3, 11, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Najlepsze Obrazy" },
+            //     new Book() { Id = 14, AuthorId = 2,  CategoryId = 1, DateAdded = new DateTime(2017, 4, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = true, Price = 13, PublishingHouseId = 2, Title = "Najlepsze æwiczenia na si³owni" },
+            //     new Book() { Id = 15, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 1, 8, 30, 5), DateRelease = new DateTime(2016, 6, 1, 8, 30, 52), Opportunity = false, Price = 17, PublishingHouseId = 1, Title = "Bieganie ranem" },
+            //     new Book() { Id = 16, AuthorId = 1,  CategoryId = 2, DateAdded = new DateTime(2017, 6, 23, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Maraton" },
+            //     new Book() { Id = 17, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 2, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = true, Price = 12, PublishingHouseId = 2, Title = "Dwa oblicza" },
+            //     new Book() { Id = 18, AuthorId = 2,  CategoryId = 1, DateAdded = new DateTime(2017, 11, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = true, Price = 15, PublishingHouseId = 1, Title = "Najlepsze gry komputerowe" },
+            //     new Book() { Id = 19, AuthorId = 2,  CategoryId = 2, DateAdded = new DateTime(2017, 3, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = true, Price = 13, PublishingHouseId = 5, Title = "Logika dla leniwych" },
+            //     new Book() { Id = 20, AuthorId = 1,  CategoryId = 1, DateAdded = new DateTime(2017, 4, 12, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = false, Price = 11, PublishingHouseId = 3, Title = "Gdzie kupiæ mieszkanie" },
+            //     new Book() { Id = 21, AuthorId = 3,  CategoryId = 1, DateAdded = new DateTime(2017, 5, 1, 8, 30, 5), DateRelease = new DateTime(2018, 6, 1, 8, 30, 52), Opportunity = false, Price = 12, PublishingHouseId = 1, Title = "Usuniête", IsDeleted = true }
+            // };
+             //Books.ForEach(item => context.Books.AddOrUpdate(item));
+             //context.SaveChanges();
              
         }
     }

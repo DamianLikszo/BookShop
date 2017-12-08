@@ -15,7 +15,7 @@ namespace BookShop.WebAPI.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return db.Carriers.Where(c => !c.IsDeleted).Select(c => c.Name).ToList();
+            return db.Carriers.Where(c => !c.IsDeleted).Select(c => c.Name);
         }
     }
 }

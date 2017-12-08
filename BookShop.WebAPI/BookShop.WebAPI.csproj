@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201712061212584_init.Designer.cs">
       <DependentUpon>201712061212584_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712080906200_fix relacje.cs" />
+    <Compile Include="Migrations\201712080906200_fix relacje.Designer.cs">
+      <DependentUpon>201712080906200_fix relacje.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -212,7 +216,6 @@
     <Compile Include="Models\Carrier.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\PublishingHouse.cs" />
-    <Compile Include="Models\DTO\BookDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +289,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712061212584_init.resx">
       <DependentUpon>201712061212584_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712080906200_fix relacje.resx">
+      <DependentUpon>201712080906200_fix relacje.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
