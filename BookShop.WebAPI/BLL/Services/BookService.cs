@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using BookShop.WebAPI.DAL;
 using BookShop.WebAPI.Models;
 using static BookShop.WebAPI.Controllers.BooksController;
@@ -36,7 +33,6 @@ namespace BookShop.WebAPI.BLL.Services
 
             if (filtrValue != string.Empty)
             {
-                // zastanowic sie nad filtrVale
                 query = query.Where(book => book.Title.ToLower().Contains(filtrValue) ||
                                             (book.Author.FirstName.ToLower() + " " + book.Author.LastName.ToLower()).Contains(filtrValue) ||
                                             (book.Author.LastName.ToLower() + " " + book.Author.FirstName.ToLower()).Contains(filtrValue)
