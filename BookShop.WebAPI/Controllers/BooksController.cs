@@ -4,28 +4,22 @@ using BookShop.WebAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using BookShop.WebAPI.Enums;
 
 namespace BookShop.WebAPI.Controllers
 {
     [RoutePrefix("api/books")]
     public class BooksController : ApiController
     {
-        public enum Additional
-        {
-            None = 0,
-            Nowosci,
-            Zapowiedzi,
-            SuperOkazje
-        }
-
-        BookShopContext db = new BookShopContext();
-        private readonly IBookService bookSevice = new BookService();
+        private readonly BookShopContext _db = new BookShopContext();
+        private readonly IBookService _bookSevice = new BookService();
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<Book> Get(int category = 0, Additional additional = 0, string filtrValue = "")
+        public IEnumerable<Book> Get(int category = 0, ExtraCategory extraCategory = 0, string filtrValue = "")
         {
-            return bookSevice.createQueryPrimary(db, additional, category, filtrValue).ToList();
+            var books = _bookSevice.createQueryPrimary(_db, extraCategory, category, filtrValue).ToList();
+            return books;
         }
 
         // GET api/values/5
@@ -33,7 +27,7 @@ namespace BookShop.WebAPI.Controllers
         [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            var books = db.Books.FirstOrDefault(b => !b.IsDeleted && b.Id == id);
+            var books = _db.Books.FirstOrDefault(b => !b.IsDeleted && b.Id == id);
 
             if (books == null)
             {
@@ -47,38 +41,16 @@ namespace BookShop.WebAPI.Controllers
         [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
-            var books = db.Books.FirstOrDefault((book => !book.IsDeleted && book.Id == id));
+            var books = _db.Books.FirstOrDefault((book => !book.IsDeleted && book.Id == id));
             if (books == null)
             {
                 return NotFound();
             }
 
             books.IsDeleted = true;
-            db.SaveChanges();
+            _db.SaveChanges();
 
             return Ok(books);
-        }
-
-        // ETAP V
-        [HttpGet]
-        [Route("category={category}")]
-        public IEnumerable<Book> GetByCategory(string category)
-        {
-            return bookSevice.createQueryCategoryOnly(db, category).ToList();
-        }
-
-        [HttpGet]
-        [Route("title={title}")]
-        public IEnumerable<Book> GetByTitle(string title)
-        {
-            return bookSevice.createQueryTitleOnly(db, title).ToList();
-        }
-
-        [HttpGet]
-        [Route("publishinghouse={publishingHouse}")]
-        public IEnumerable<Book> GetByPublishingHouse(string publishingHouse)
-        {
-            return bookSevice.createQueryPublishingHouseOnly(db, publishingHouse).ToList();
         }
     }
 }

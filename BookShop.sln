@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.WebAPI", "BookShop.WebAPI\BookShop.WebAPI.csproj", "{FC92BF50-59A0-4C25-BA7D-B73626AE92EF}"
 EndProject

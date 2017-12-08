@@ -1,32 +1,32 @@
 ﻿using System;
 using System.Linq;
 using BookShop.WebAPI.DAL;
+using BookShop.WebAPI.Enums;
 using BookShop.WebAPI.Models;
-using static BookShop.WebAPI.Controllers.BooksController;
 
 namespace BookShop.WebAPI.BLL.Services
 {
     public class BookService : IBookService
     {
-        public IQueryable<Book> createQueryPrimary(BookShopContext db, Additional additional, int category, string filtrValue)
+        public IQueryable<Book> createQueryPrimary(BookShopContext db, ExtraCategory extraCategory, int category, string filtrValue)
         {
             DateTime dateFrom, dateTo, dateNow = DateTime.Now;
             var query = db.Books.AsQueryable();
             query = query.Where(book => !book.IsDeleted);
             filtrValue = filtrValue.ToLower();
 
-            switch (additional)
+            switch (extraCategory)
             {
-                case Additional.Nowosci:
+                case ExtraCategory.Nowosci:
                     dateFrom = dateNow.AddDays(-14);
                     query = query.Where(book => book.DateAdded > dateFrom);
                     break;
-                case Additional.Zapowiedzi:
+                case ExtraCategory.Zapowiedzi:
                     dateFrom = dateNow;
                     dateTo = dateNow.AddDays(14);
                     query = query.Where(book => book.DateRelease > dateFrom && book.DateRelease <= dateTo);
                     break;
-                case Additional.SuperOkazje:
+                case ExtraCategory.SuperOkazje:
                     query = query.Where(book => book.Opportunity);
                     break;
             }
@@ -35,7 +35,8 @@ namespace BookShop.WebAPI.BLL.Services
             {
                 query = query.Where(book => book.Title.ToLower().Contains(filtrValue) ||
                                             (book.Author.FirstName.ToLower() + " " + book.Author.LastName.ToLower()).Contains(filtrValue) ||
-                                            (book.Author.LastName.ToLower() + " " + book.Author.FirstName.ToLower()).Contains(filtrValue)
+                                            (book.Author.LastName.ToLower() + " " + book.Author.FirstName.ToLower()).Contains(filtrValue) ||
+                                            book.PublishingHouse.Name.ToLower().Contains(filtrValue)
                                             );
             }
             if (category > 0)
@@ -44,25 +45,6 @@ namespace BookShop.WebAPI.BLL.Services
             query = query.OrderBy(book => book.Title);
 
             return query;
-        }
-
-        public IQueryable<Book> createQueryCategoryOnly(BookShopContext db, string category)
-        {
-            category = category.ToLower();
-            return db.Books.Where(book => !book.IsDeleted && book.Category.Name.ToLower().Contains(category)).OrderBy(book => book.Category.Name);
-        }
-
-        public IQueryable<Book> createQueryPublishingHouseOnly(BookShopContext db, string publishingHouse)
-        {
-            publishingHouse = publishingHouse.ToLower();
-            return db.Books.Where(book => !book.IsDeleted && book.PublishingHouse.Name.ToLower().Contains(publishingHouse))
-                           .OrderBy(book => book.PublishingHouse.Name);
-        }
-
-        public IQueryable<Book> createQueryTitleOnly(BookShopContext db, string title)
-        { 
-            title = title.ToLower();
-            return db.Books.Where(book => !book.IsDeleted && book.Title.ToLower().Contains(title)).OrderBy(book => book.Title);
         }
     }
 }
