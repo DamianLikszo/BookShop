@@ -9,7 +9,12 @@ namespace BookShop.WebAPI.Controllers
     [System.Web.Mvc.RoutePrefix("api/categories")]
     public class CategoriesController : ApiController
     {
-        private readonly BookShopContext _db = new BookShopContext();
+        private readonly BookShopContext _db;
+
+        public CategoriesController(BookShopContext db)
+        {
+            _db = db;
+        }
 
         // GET api/values
         [System.Web.Http.HttpGet]

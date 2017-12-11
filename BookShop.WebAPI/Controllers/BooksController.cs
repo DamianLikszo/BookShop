@@ -14,10 +14,10 @@ namespace BookShop.WebAPI.Controllers
         private readonly BookShopContext _db;
         private readonly IBookService _bookSevice;
 
-        public BooksController()
+        public BooksController(BookShopContext db, IBookService bookSevice)
         {
-            _db = new BookShopContext();
-            _bookSevice = new BookService(_db);
+            _db = db;
+            _bookSevice = bookSevice;
         }
 
         // GET api/values

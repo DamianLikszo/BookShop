@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BookShop.WebAPI.BLL.Services
 {
-    interface IBookService
+    public interface IBookService
     {
         IEnumerable<Book> createQuery(ExtraCategory extraCategory, int category, string filtrValue);
     }
