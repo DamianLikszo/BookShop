@@ -4,10 +4,12 @@ using BookShop.WebAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using BookShop.WebAPI.Enums;
 
 namespace BookShop.WebAPI.Controllers
 {
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/books")]
     public class BooksController : ApiController
     {

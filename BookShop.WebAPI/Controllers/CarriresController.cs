@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 
 namespace BookShop.WebAPI.Controllers
 {
+    [EnableCors("*", "*", "*")]
     [System.Web.Mvc.RoutePrefix("api/carriers")]
     public class CarriresController : ApiController
     {
