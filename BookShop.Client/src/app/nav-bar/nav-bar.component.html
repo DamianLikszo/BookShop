@@ -1,0 +1,23 @@
+<nav class="navbar my-navbar navbar-expand-lg navbar-light">
+    <div class="navbar-brand my-navbar-brand">
+        <h4>Księgarnia Internetowa</h4>
+        <span>Nasze sklepy prowadzimy z pasją!</span>
+    </div>
+
+    <div style="position: relative">
+        <form class="form-inline" [formGroup]="searchForm">
+            <label>Wyszukiwarka</label>
+            <div class="input-container">
+                <input formControlName="query" type="search" class="mx-1">
+                <span class="fa fa-search"></span>
+            </div>
+        </form>
+    </div>
+
+    <div>Twój koszyk</div>
+    <div class="card">
+        <a href="" data-toggle="modal" data-target="#myBasket">
+            Liczba produktów: {{this.basketItems}}
+        </a>
+    </div>
+</nav>

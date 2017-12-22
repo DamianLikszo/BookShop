@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="modal fade" id="myBasket">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Moje zamówienie</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tytuł</th>
+                                <th scope="col">Nośnik</th>
+                                <th scope="col">Ilość</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i = index; let item of items | async">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item.title}}</td>
+                                <td>{{item.carrier}}</td>
+                                <td>{{item.quantity}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="my-button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

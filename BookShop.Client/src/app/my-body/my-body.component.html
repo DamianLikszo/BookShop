@@ -1,0 +1,54 @@
+<div class="container my-body">
+  <h5>Katalog książek</h5>
+  <div class="my-body-content">
+    <ul class="nav my-nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active, my-active': (getModeStream() | async) === 'all' }" routerLink="/all">Wszystkie</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active, my-active': (getModeStream() | async) === 'audiobook' }" routerLink="/audiobook">Audiobooki</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active, my-active': (getModeStream() | async) === 'ebook' }" routerLink="/ebook">Ebooki</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active, my-active': (getModeStream() | async) === 'new' }" routerLink="/new">Nowości</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active, my-active': (getModeStream() | async) === 'release' }" routerLink="/release">Zapowiedzi</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active, my-active': (getModeStream() | async) === 'opportunity' }" routerLink="/opportunity">Super Okazje</a>
+      </li>
+    </ul>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nazwa</th>
+          <th scope="col">Data wydania</th>
+          <th scope="col">Cena</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Wydawnictwo</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i = index; let book of books | async">
+          <th scope="row">{{i+1}}</th>
+          <td>{{book.Title}}</td>
+          <td>{{book.DateRelease}}</td>
+          <td>{{book.Price}}</td>
+          <td>{{book.Author.FirstName +' '+ book.Author.LastName }}</td>
+          <td>{{book.PublishingHouse.Name}}</td>
+          <td>
+            <a href="" class="cardhref" data-toggle="modal" data-target="#myCart" (click)="addCart(book)">do koszyka</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-add-cart></app-add-cart>
+<app-basket></app-basket>
